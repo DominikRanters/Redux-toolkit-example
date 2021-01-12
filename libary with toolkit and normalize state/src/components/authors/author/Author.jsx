@@ -12,7 +12,7 @@ const Author = ({ authorId }) => {
 
     const openInputDialog = async () => {
         const result = await chayns.dialog.input({
-            placeholderText: "Künstlername",
+            placeholderText: "Autor",
             type: chayns.dialog.inputType.INPUT,
             text: author.fullName,
             buttons:[{
@@ -23,6 +23,7 @@ const Author = ({ authorId }) => {
 
         if (result.buttonType === 1) {
             const body = {
+                id: authorId,
                 fullName: result.text
             };
 
