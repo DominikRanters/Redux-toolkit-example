@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, List } from 'chayns-components';
-import Book from '../books/book/Book';
+import { Accordion } from 'chayns-components';
 import { useSelector } from 'react-redux';
-import { selectAuthorsEntities, selectAuthorsIds } from '../../redux-modules/authors/authorsSelectors';
+import { selectAuthorStore } from '../../redux-modules/author/authorSelectors';
 import Author from './author/Author';
 
-const Authors = ({}) => {
-    const authorIds = useSelector(selectAuthorsIds);
-    const authors = useSelector(selectAuthorsEntities);
+const Authors = () => {
+    const authorStore = useSelector(selectAuthorStore);
+
+    const authors = useMemo(() => (
+        [...authorStore.authors].sort((a, b) => (
+            a.fullName.localeCompare(b.fullName)
+        ))
+    ), [authorStore])
 
     return (
         <Accordion
@@ -16,10 +20,11 @@ const Authors = ({}) => {
             dataGroup="general"
         >
             {
-                authorIds.map(authorId => (
-                  <Author
-                    authorId={authorId}
-                  />
+                authors.map(author => (
+                    <Author
+                        key={author.id}
+                        author={author}
+                    />
                 ))
             }
         </Accordion>

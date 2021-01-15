@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Accordion, List, ListItem, SmallWaitCursor } from 'chayns-components';
-import { selectBooksEntities, selectBooksIds } from '../../redux-modules/books/bookSelectors';
-import { selectAuthorsEntities } from '../../redux-modules/authors/authorsSelectors';
+import { Accordion, List } from 'chayns-components';
 import Book from './book/Book';
+import { selectAuthorStore } from '../../redux-modules/author/authorSelectors';
 
 const Books = ({}) => {
-    const bookIds = useSelector(selectBooksIds);
+    const authorStore = useSelector(selectAuthorStore);
 
-    if (bookIds.length === 0) {
-        return <SmallWaitCursor />;
-    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const books = useMemo(() => {
+        let booksArray = [];
+
+        authorStore.authors.forEach(author => {
+            author.books.forEach(book => {
+                booksArray.push({
+                   ...book,
+                    authorFullName: author.fullName,
+                });
+            })
+        });
+
+        return booksArray
+    }, [authorStore])
 
     return (
         <Accordion
@@ -20,9 +31,10 @@ const Books = ({}) => {
         >
             <List>
                 {
-                    bookIds.map(bookId =>
+                    books.map(book =>
                         <Book
-                            bookId={bookId}
+                            key={book.id}
+                            book={book}
                         />
                     )
                 }

@@ -4,7 +4,7 @@ import { fetchAddBook, fetchBookAuthorCollection } from './bookActions';
 const booksAdapter = createEntityAdapter();
 
 const slice = createSlice({
-    name: 'books',
+    name: 'book',
     initialState: {
         ...booksAdapter.getInitialState(),
         isLoading: false,

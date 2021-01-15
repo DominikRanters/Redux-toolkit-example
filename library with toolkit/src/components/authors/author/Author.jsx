@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, ContextMenu } from 'chayns-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { createAuthorSelector } from '../../../redux-modules/authors/authorsSelectors';
-import { fetchUpdateAuthor } from '../../../redux-modules/authors/authorsActions';
+import { useDispatch } from 'react-redux';
+import { fetchUpdateAuthor } from '../../../redux-modules/author/authorActions';
 
-const Author = ({ authorId }) => {
+const Author = ({ author }) => {
     const dispatch = useDispatch();
-
-    const author = useSelector(createAuthorSelector(authorId));
 
     const openInputDialog = async () => {
         const result = await chayns.dialog.input({
-            placeholderText: "Künstlername",
+            placeholderText: "Autor",
             type: chayns.dialog.inputType.INPUT,
             text: author.fullName,
             buttons:[{
@@ -23,7 +20,7 @@ const Author = ({ authorId }) => {
 
         if (result.buttonType === 1) {
             const body = {
-                id: authorId,
+                id: author.id,
                 fullName: result.text
             };
 
@@ -46,12 +43,17 @@ const Author = ({ authorId }) => {
                     }]}
                 />
             }
-        />
+        >
+            <div/>
+        </Accordion>
     );
 };
 
 Author.propTypes = {
-    authorId: PropTypes.number.isRequired,
+    author: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        fullName: PropTypes.string.isRequired,
+    }).isRequired
 };
 Author.defaultProps = {
 

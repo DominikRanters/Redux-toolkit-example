@@ -10,7 +10,7 @@ const authorsAdapter = createEntityAdapter({
 });
 
 const slice = createSlice({
-    name: 'authors',
+    name: 'author',
     initialState: authorsAdapter.getInitialState(),
     reducers: {
 
