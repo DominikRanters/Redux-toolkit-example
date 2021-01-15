@@ -1,6 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchAddBook, fetchBookAuthorCollection } from '../book/bookActions';
-import { fetchUpdateAuthor } from './authorActions';
+import { fetchBookAuthorCollection } from '../book/bookActions';
+import { fetchUpdateAuthor, fetchAddAuthor } from './authorActions';
 
 const authorsAdapter = createEntityAdapter({
     // set key value (default = id)
@@ -34,8 +34,8 @@ const slice = createSlice({
         // ---- Short version
         // [fetchUpdateAuthor.fulfilled]: authorsAdapter.upsertOne,
 
-        //  --- fetchUpdateAuthor --- only fulfilled
-        [fetchAddBook.fulfilled]: (draft, { payload }) => {
+        //  --- fetchAddAuthor --- only fulfilled
+        [fetchAddAuthor.fulfilled]: (draft, { payload }) => {
             authorsAdapter.addOne(draft, payload.author);
         },
     }

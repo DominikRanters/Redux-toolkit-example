@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Accordion, Button, Input } from 'chayns-components';
 import './addBook.scss';
-import { fetchAddBook } from '../../redux-modules/author/authorActions';
+import { fetchAddAuthor } from '../../redux-modules/author/authorActions';
 
 const AddBook = () => {
     const dispatch = useDispatch();
@@ -13,15 +13,13 @@ const AddBook = () => {
 
     const handleSaveBook = async () => {
         const body = {
-            book: {
+            fullName: authorFullName,
+            books: [{
                 title: bookName,
-            },
-            author: {
-                fullName: authorFullName,
-            }
+            }],
         };
 
-        const result = await dispatch(fetchAddBook(body));
+        const result = await dispatch(fetchAddAuthor(body));
 
         console.log(result);
 

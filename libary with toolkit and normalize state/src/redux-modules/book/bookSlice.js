@@ -1,5 +1,6 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchAddBook, fetchBookAuthorCollection } from './bookActions';
+import { fetchBookAuthorCollection } from './bookActions';
+import { fetchAddAuthor } from '../author/authorActions';
 
 const booksAdapter = createEntityAdapter();
 
@@ -13,6 +14,7 @@ const slice = createSlice({
 
     },
     extraReducers: {
+        //  --- fetchBookAuthorCollection --- all stats
         [fetchBookAuthorCollection.pending]: (draft, { payload }) => {
             draft.isLoading = true;
         },
@@ -23,7 +25,9 @@ const slice = createSlice({
         [fetchBookAuthorCollection.rejected]: (draft, { payload }) => {
             draft.isLoading = false;
         },
-        [fetchAddBook.fulfilled]: (draft, { payload }) => {
+
+        //  --- fetchAddAuthor --- only fulfilled
+        [fetchAddAuthor.fulfilled]: (draft, { payload }) => {
             booksAdapter.addOne(draft, payload.book);
         },
     }

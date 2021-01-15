@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAddBook, fetchUpdateAuthor, fetchBookAuthorCollection } from "./authorActions";
+import { fetchAddAuthor, fetchUpdateAuthor, fetchBookAuthorCollection } from "./authorActions";
 
 const slice = createSlice({
     name: 'author',
@@ -36,8 +36,8 @@ const slice = createSlice({
             };
         },
 
-        //  --- fetchAddBook --- only fullfilled
-        [fetchAddBook.fulfilled]: (draft, { payload }) => {
+        //  --- fetchAddAuthor --- only fullfilled
+        [fetchAddAuthor.fulfilled]: (draft, { payload }) => {
             draft.authors.push(payload);
         },
     }
