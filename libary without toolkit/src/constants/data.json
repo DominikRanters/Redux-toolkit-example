@@ -1,0 +1,39 @@
+[
+	{
+		"id": 3,
+		"fullName": "Dominik Ranters",
+		"books": [
+			{
+				"id": 1,
+				"title": "Vorträge halten"
+			},{
+				"id": 2,
+				"title": "Spaß mit Redux"
+			}
+		]
+	},{
+		"id": 25,
+		"fullName": "Luca Jesußek",
+		"books": [
+			{
+				"id": 4,
+				"authorId": 25,
+				"title": "Wie ich ein wildes Bier gezähmt habe!"
+			},{
+				"id": 5,
+				"authorId": 25,
+				"title": "Bitburger ist gutes Wasser!"
+			}
+		]
+	},{
+		"id": 42,
+		"fullName": "Homer Simpson",
+		"books": [
+			{
+				"id": 3,
+				"authorId": 42,
+				"title": "Baumhaus"
+			}
+		]
+	}
+]
