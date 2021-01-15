@@ -29,9 +29,9 @@ export const fetchBookAuthorCollection = createAsyncThunk(
 
 export const fetchAddBook = createAsyncThunk(
     'global/fetchAddBook',
-    async (body , { rejectWithValue }) => {
+    async (body , { rejectWithValue, getState }) => {
+        const { book, author } = getState();
 
-        await sleep(2000);
         // --------- Do fetch --------
         // const result = await request.fetch(
         //     `/../src/constants/data.json`,
@@ -42,12 +42,15 @@ export const fetchAddBook = createAsyncThunk(
         //     {}
         // );
 
+        // Set Ids (because I have no backend)
+        const newBookId = book.ids.length + 1;
+        const newAuthorId = author.ids.length + 1;
+
+        body.book.id = newBookId;
+        body.book.authorId = newAuthorId;
+        body.author.id = newAuthorId;
+        body.author.bookIds = [newBookId];
+
         return body;
-
-        if (result.status === 200) {
-            return result.data;
-        }
-
-        return rejectWithValue();
     }
 );

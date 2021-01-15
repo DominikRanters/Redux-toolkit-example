@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchBookAuthorCollection } from './booksActions';
+import { fetchAddBook, fetchBookAuthorCollection } from './bookActions';
 
 const booksAdapter = createEntityAdapter();
 
@@ -22,6 +22,9 @@ const slice = createSlice({
         },
         [fetchBookAuthorCollection.rejected]: (draft, { payload }) => {
             draft.isLoading = false;
+        },
+        [fetchAddBook.fulfilled]: (draft, { payload }) => {
+            booksAdapter.addOne(draft, payload.book);
         },
     }
 });

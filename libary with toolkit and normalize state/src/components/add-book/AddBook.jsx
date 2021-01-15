@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Accordion, Button, Input } from 'chayns-components';
 import './addBook.scss';
+import { fetchAddBook } from '../../redux-modules/book/bookActions';
 
 const AddBook = ({}) => {
     const dispatch = useDispatch();
@@ -10,12 +11,24 @@ const AddBook = ({}) => {
     const [bookName, setBookName] = useState('');
     const [authorFullName, setAuthorFullName] = useState('');
 
-    const handleSaveBook = () => {
+    const handleSaveBook = async () => {
         const body = {
+            book: {
+                title: bookName
+            },
+            author: {
+                fullName: authorFullName
+            }
+        };
 
+        const result = await dispatch(fetchAddBook(body));
+
+        console.log(result);
+
+        if (result.type.endsWith('/fulfilled')) {
+            setBookName('');
+            setAuthorFullName('');
         }
-
-        dispatch();
     };
 
     return (

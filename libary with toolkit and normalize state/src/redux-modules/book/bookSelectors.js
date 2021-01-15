@@ -1,10 +1,10 @@
-// Get Data books store from the redux
+// Get Data book store from the redux
 export const selectBookStore = (state) => state.book;
 
-// get entities from books
+// get entities from book
 export const selectBookEntities = (state) => state.book.entities;
 
-// get ids from books
+// get ids from book
 export const selectBookIds = (state) => state.book.ids;
 
 // get book by id

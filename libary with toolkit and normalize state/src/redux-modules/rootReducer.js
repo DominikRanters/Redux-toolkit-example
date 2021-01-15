@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import authorsReducer from './authors/authorsSlice';
-import booksReducer from './books/booksSlice';
+import authorsReducer from './author/authorSlice';
+import booksReducer from './book/bookSlice';
 
 export default combineReducers({
     author: authorsReducer,

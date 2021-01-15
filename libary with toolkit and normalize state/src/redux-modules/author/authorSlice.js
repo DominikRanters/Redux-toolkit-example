@@ -1,12 +1,12 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchBookAuthorCollection } from '../books/booksActions';
-import { fetchUpdateAuthor } from './authorsActions';
+import { fetchAddBook, fetchBookAuthorCollection } from '../book/bookActions';
+import { fetchUpdateAuthor } from './authorActions';
 
 const authorsAdapter = createEntityAdapter({
     // set key value (default = id)
-    selectId: (book) => book.id,
+    selectId: (author) => author.id,
     // set sorted value (default = key)
-    sortComparer: (a, b) => a.id - b.id,
+    sortComparer: (a, b) => a.fullName.localeCompare(b.fullName),
 });
 
 const slice = createSlice({
@@ -16,6 +16,7 @@ const slice = createSlice({
 
     },
     extraReducers: {
+        //  --- fetchBookAuthorCollection --- all stats
         [fetchBookAuthorCollection.pending]: (draft, { payload }) => {
 
         },
@@ -25,17 +26,17 @@ const slice = createSlice({
         [fetchBookAuthorCollection.rejected]: (draft, { payload }) => {
 
         },
-        [fetchUpdateAuthor.pending]: (draft, { payload }) => {
 
-        },
+        //  --- fetchUpdateAuthor --- all stats
         [fetchUpdateAuthor.fulfilled]: (draft, { payload }) => {
             authorsAdapter.upsertOne(draft, payload);
         },
-        // Short version
+        // ---- Short version
         // [fetchUpdateAuthor.fulfilled]: authorsAdapter.upsertOne,
-        //
-        [fetchUpdateAuthor.rejected]: (draft, { payload }) => {
 
+        //  --- fetchUpdateAuthor --- only fulfilled
+        [fetchAddBook.fulfilled]: (draft, { payload }) => {
+            authorsAdapter.addOne(draft, payload.author);
         },
     }
 });

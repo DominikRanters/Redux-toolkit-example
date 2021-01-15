@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, ContextMenu } from 'chayns-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAuthorSelector } from '../../../redux-modules/authors/authorsSelectors';
-import { fetchUpdateAuthor } from '../../../redux-modules/authors/authorsActions';
+import { createAuthorSelector } from '../../../redux-modules/author/authorSelectors';
+import { fetchUpdateAuthor } from '../../../redux-modules/author/authorActions';
 
 const Author = ({ authorId }) => {
     const dispatch = useDispatch();
@@ -46,7 +46,9 @@ const Author = ({ authorId }) => {
                     }]}
                 />
             }
-        />
+        >
+            <div/>
+        </Accordion>
     );
 };
 

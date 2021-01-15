@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Accordion, List, ListItem, SmallWaitCursor } from 'chayns-components';
-import { selectBookEntities, selectBookIds } from '../../redux-modules/books/bookSelectors';
-import { selectAuthorEntities } from '../../redux-modules/authors/authorsSelectors';
+import { selectBookEntities, selectBookIds } from '../../redux-modules/book/bookSelectors';
+import { selectAuthorEntities } from '../../redux-modules/author/authorSelectors';
 import Book from './book/Book';
 
 const Books = ({}) => {
@@ -22,6 +22,7 @@ const Books = ({}) => {
                 {
                     bookIds.map(bookId =>
                         <Book
+                            key={bookId}
                             bookId={bookId}
                         />
                     )

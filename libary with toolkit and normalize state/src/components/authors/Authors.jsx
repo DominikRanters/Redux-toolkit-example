@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, List } from 'chayns-components';
-import Book from '../books/book/Book';
 import { useSelector } from 'react-redux';
-import { selectAuthorEntities, selectAuthorIds } from '../../redux-modules/authors/authorsSelectors';
+import { selectAuthorIds } from '../../redux-modules/author/authorSelectors';
 import Author from './author/Author';
 
-const Authors = ({}) => {
+const Authors = () => {
     const authorIds = useSelector(selectAuthorIds);
-    const authors = useSelector(selectAuthorEntities);
 
     return (
         <Accordion
@@ -17,9 +15,10 @@ const Authors = ({}) => {
         >
             {
                 authorIds.map(authorId => (
-                  <Author
-                    authorId={authorId}
-                  />
+                    <Author
+                        key={authorId}
+                        authorId={authorId}
+                    />
                 ))
             }
         </Accordion>

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem } from 'chayns-components';
 import { shallowEqual, useSelector } from 'react-redux';
-import { createBookSelector } from '../../../redux-modules/books/bookSelectors';
-import { selectAuthorEntities } from '../../../redux-modules/authors/authorsSelectors';
+import { createBookSelector } from '../../../redux-modules/book/bookSelectors';
+import { selectAuthorEntities } from '../../../redux-modules/author/authorSelectors';
 
 const Book = ({ bookId }) => {
     const book = useSelector(createBookSelector(bookId), shallowEqual);

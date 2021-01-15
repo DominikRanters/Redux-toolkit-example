@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SmallWaitCursor } from 'chayns-components';
 import Books from './books/Books';
 import AddBook from './add-book/AddBook';
-import { fetchBookAuthorCollection } from '../redux-modules/books/booksActions';
-import { selectBookIds, selectBookStore } from '../redux-modules/books/bookSelectors';
+import { fetchBookAuthorCollection } from '../redux-modules/book/bookActions';
+import { selectBookIds, selectBookStore } from '../redux-modules/book/bookSelectors';
 import Authors from './authors/Authors';
 
 const App = () => {
