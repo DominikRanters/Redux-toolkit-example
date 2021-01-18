@@ -1,28 +1,18 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Accordion, List } from 'chayns-components';
 import Book from './book/Book';
-import { selectAuthorStore } from '../../redux-modules/selector/authorSelector';
+import { selectAuthorList } from '../../redux-modules/selector/authorSelector';
 
-const Books = ({}) => {
-    const authorStore = useSelector(selectAuthorStore);
+const Books = () => {
+    const authorList = useSelector(selectAuthorList);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const books = useMemo(() => {
-        let booksArray = [];
-
-        authorStore.authors.forEach(author => {
-            author.books.forEach(book => {
-                booksArray.push({
-                   ...book,
-                    authorFullName: author.fullName,
-                });
-            })
-        });
-
-        return booksArray
-    }, [authorStore])
+    const books = useMemo(() => authorList.flatMap((author) => (
+        author.books.map((book) => ({
+            ...book,
+            authorFullName: author.fullName
+        }))
+    )), [authorList])
 
     return (
         <Accordion

@@ -1,6 +1,9 @@
 // Get Data book store from the redux
 export const selectBookStore = (state) => state.book;
 
+// get isLoading from book
+export const selectBookIsLoading = (state) => state.book.isLoading;
+
 // get entities from book
 export const selectBookEntities = (state) => state.book.entities;
 
