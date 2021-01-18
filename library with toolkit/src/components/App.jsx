@@ -5,12 +5,12 @@ import Books from './books/Books';
 import AddBook from './add-book/AddBook';
 import Authors from './authors/Authors';
 import { fetchBookAuthorCollection } from '../redux-modules/author/authorActions';
-import { selectAuthorStore } from '../redux-modules/author/authorSelectors';
+import { selectAuthorIsLoading } from '../redux-modules/author/authorSelectors';
 
 const App = () => {
     const dispatch = useDispatch();
 
-    const authorStore = useSelector(selectAuthorStore);
+    const isAuthorLoading = useSelector(selectAuthorIsLoading);
 
     useEffect(() => {
         dispatch(fetchBookAuthorCollection());
@@ -20,7 +20,7 @@ const App = () => {
         <div className="tapp">
             <AddBook />
             {
-                authorStore.isLoading ?
+                isAuthorLoading ?
                     <div style={{ marginTop: '40px', textAlign: 'center' }}>
                         <SmallWaitCursor show />
                     </div>

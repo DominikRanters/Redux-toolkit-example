@@ -1,18 +1,17 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { Accordion } from 'chayns-components';
 import { useSelector } from 'react-redux';
-import { selectAuthorStore } from '../../redux-modules/author/authorSelectors';
+import { selectAuthorList } from '../../redux-modules/author/authorSelectors';
 import Author from './author/Author';
 
 const Authors = () => {
-    const authorStore = useSelector(selectAuthorStore);
+    const authorList = useSelector(selectAuthorList);
 
     const authors = useMemo(() => (
-        [...authorStore.authors].sort((a, b) => (
+        [...authorList].sort((a, b) => (
             a.fullName.localeCompare(b.fullName)
         ))
-    ), [authorStore])
+    ), [authorList])
 
     return (
         <Accordion
