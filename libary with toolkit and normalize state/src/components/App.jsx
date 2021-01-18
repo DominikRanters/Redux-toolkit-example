@@ -4,13 +4,13 @@ import { SmallWaitCursor } from 'chayns-components';
 import Books from './books/Books';
 import AddBook from './add-book/AddBook';
 import { fetchBookAuthorCollection } from '../redux-modules/book/bookActions';
-import { selectBookStore } from '../redux-modules/book/bookSelectors';
+import { selectBookIsLoading } from '../redux-modules/book/bookSelectors';
 import Authors from './authors/Authors';
 
 const App = () => {
     const dispatch = useDispatch();
 
-    const bookStore = useSelector(selectBookStore);
+    const isLoading = useSelector(selectBookIsLoading);
 
     useEffect(() => {
         dispatch(fetchBookAuthorCollection());
@@ -20,7 +20,7 @@ const App = () => {
         <div className="tapp">
             <AddBook />
             {
-                bookStore.isLoading ?
+                isLoading ?
                     <div style={{ marginTop: '40px', textAlign: 'center' }}>
                         <SmallWaitCursor show />
                     </div>
